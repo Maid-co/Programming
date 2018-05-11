@@ -1,0 +1,613 @@
+Basics:
+
+ 
+
+Type - sets what does the formula damage or heal.
+
+None - Nothing, no damage will be dealt.
+
+HP Damage - HP will be damaged
+
+MP Damage - MP will be damaged
+
+HP Recover - HP will be restored
+
+MP Recover - MP will be restored
+
+HP Drain - Deals damage to enemy HP and restores that much HP for attacker
+
+MP Drain - Deals damage to enemy MP and restores that much MP for attacker
+
+ 
+
+Element - Sets which element to use. Normal attack - means will use same element as weapon.
+
+ 
+
+Variance - How will damage fluctuate. E.g. If skill formula says it deals 100 damage and variance is 20%, the skill will deal between 80 and 120 damage.
+
+ 
+
+Critical - Can skill critically hit, dealing increased damage by 300%.
+
+ 
+
+And now, the actual fun part - formulas!
+
+It decides how much damage will opponent take or ally will heal.
+
+ 
+
+Let's dissect one of basic formulas that come with RPG Maker MV - Fire
+
+100 + a.mat * 2 - b.mdf * 2
+
+ 
+
+What do things like a and b mean?
+
+a - attacker
+
+b - defender
+
+So if Actor Glasses were to cast Fire on a Slime. a would be Glasses and b would be Slime.
+
+ 
+
+Meaning the takes double of Glasses mat (Magic Attack) parameter and subtracts double of Slime's mdf (Magic Defense) parameter and adds that to the 100 in the beginning ofthe formula.
+
+E.g. Glasses has 100 mat and Slime has 20 mdf. If we were to convert fomula using those numbers, we'd have - 100 + 100*2 - 20*2, after calculation we see with those parameters Fire would deal 260 damage if there were no variance.
+
+ 
+
+But only last number in the formula deals damage. If you had 2 lines of formula. (semicolon ; tells where line ends for the program)
+
+E.g. a.atk; a.atk*2
+
+Only a.atk*2 would be calculated for damage.
+
+ 
+
+Are there more letters other than a and b for the formulas? 
+
+Yes. There are variables. Which are used like this: v[iD]. ID - index of the variable.
+
+So you could have a skill that gets stronger the higher variable is.
+
+E.g. v[10] * 2 - b.def * 3
+
+ 
+
+Is there a way to make skill even more complex, e.g. if some variable is over 100, deal extra damage?
+
+Yes, in that case we can use if else statements.
+
+How if else statement looks:
+
+
+
+
+if (statement)
+
+{
+
+   formula1;
+
+}
+
+else
+
+{
+
+   formula2;
+
+}
+
+ 
+
+But how to write it to the damage formula? It only has 1 line!
+
+Just write everything together~
+
+
+
+
+if (statement) { formula1; } else { formula2; }
+
+E.g.: 
+
+
+
+
+if (v[10] > 100) { a.atk*4 - b.def*2 } else { a.atk*2 - b.def*2 }
+
+Which can be shortened to this if you're using only 1 line of formula.
+
+
+
+
+if (statement)
+
+   formula1;
+
+else
+
+   formula2;
+
+
+E.g.: 
+
+
+
+
+if (v[10] > 100) a.atk*4 - b.def*2; else a.atk*2 - b.def*2;
+
+ 
+
+And you can shorten it even further using ternary operator (my favorite one):
+
+
+
+
+statement ? formula1 : formula2;
+
+E.g.:
+
+
+
+
+ v[10] > 100 ? a.atk*4 - b.def*2 : a.atk*2 - b.def*2;
+
+ 
+
+Symbols for statements:
+
+> - more than
+
+< - less than
+
+>= more than or equal to
+
+<= less than or equal to
+
+=== equal to
+
+&& and
+
+|| or
+
+!== not equal
+
+! not
+
+ 
+
+Examples:
+
+v[10] > 100 ? 1000 : 100; (If variable 10 is more than 100, it'll deal 1000 damage, else it'll only deal 100)
+
+ 
+
+v[10] < 100 ? 1000 : 100; (If variable 10 is less than 100, it'll deal 1000 damage, else, it'll only deal 100)
+
+ 
+
+v[10] >== 100 ? 1000 : 100; (If variable is 100 or more, it'll deal 1000 damage, else it'll only deal 100)
+
+ 
+
+v[10] <== 100 ? 1000 : 100; (If variable is 100 or less, it'll deal 1000 damage, else it'll only deal 100)
+
+ 
+
+v[10] === 100 ? 1000: 100; (If variable is equal to 100, it'll deal 1000 damage, else it'll only deal 100)
+
+ 
+
+v[10] > 50 && v[11] >== 25 ? 1000 : 100; (If variable 10 is more than 50 and variable 11 is 25 or more, it'll deal 1000 damage, else it'll only deal 100)
+
+ 
+
+v[10] > 50 || v[11] > 50 ? 1000 : 100; (If variable 10 is more than 50 or variable 11 is more than 50 then it'll deal 1000 damage, it'll only deal 100)
+
+ 
+
+v[10] !== 100 ? 1000 : 100; (If variable 10 is not equal to 100, it'll deal 1000 damage else it'll only deal 100)
+
+ 
+
+What about parameters to use for a and b?
+
+Here's a whole list of them:
+
+ 
+
+Current: (All flat numbers, e.g.: 900, 999, 11)
+
+level - current level (Actor only by default)
+
+hp - current hp
+
+mp - current mp
+
+tp - current tp
+
+ 
+
+Params: (All flat numbers, e.g.: 1337, 7331, 156)
+
+mhp - max hp
+
+mmp - max MP
+
+atk - attack
+
+def - defence
+
+mat - magic attack
+
+mdf - magic defence
+
+agi - agility
+
+luk - luck
+
+ 
+
+XParams: (All decimal numbers symbolizing percent, e.g. 1.0, 0.5, 0.75, 2.44 would be 100%, 50%, 75%, 244%)
+
+hit - Hit rate
+
+eva - Evasion rate
+
+cri - Critical rate
+
+cev - Critical evasion rate
+
+mev - Magic evasion rate
+
+mrf - Magic reflection rate
+
+cnt - Counter attack rate
+
+hrg - HP regeneration rate
+
+mrg - MP regeneration rate
+
+trg - TP regeneration rate
+
+ 
+
+SParams:(All decimal numbers symbolizing percent, e.g. 1.0, 0.5, 0.75, 2.44 would be 100%, 50%, 75%, 244%)
+
+tgr - Target Rate
+
+grd - Guard effect rate
+
+rec - Recovery effect rate
+
+pha - Pharmacology
+
+mcr - MP Cost rate
+
+tcr - TP Charge rate
+
+pdr - Physical damage rate
+
+mdr - Magical damage rate
+
+fdr - Floor damage rate
+
+exr - Experience rate
+
+ 
+
+How about changing HP/MP/TP?
+
+gainHp(value) - restores HP by value
+
+gainMp(value) - restores MP by value
+
+gainTp(value) - restores TP by value
+
+ 
+
+setHp(hp) - sets HP to value
+
+setMp(mp) - sets MP to value
+
+setTp(tp) - sets TP to value
+
+E.g. a.setHp(a.mhp)
+
+E.g. a.setHp(a.hp + 100)
+
+ 
+
+clearTp() - sets TP to 0
+
+ 
+
+ 
+
+What about advanced stuff where you can influence formulas with states?
+
+We got all that!
+
+isStateAffected(stateId) - checks if battler has state inflicted to them.
+
+E.g. b.isStateAffected(10) ? 10000 : 1;
+
+ 
+
+isDeathStateAffected() - checks if battler has death state inflicted to them.
+
+E.g. b.isDeathStateAffected() ? 10000 : 1;
+
+ 
+
+resetStateCounts(stateId) - refreshes how long state will last for the battler
+
+if (b.isStateAffected(10)) b.resetStateCounts(10); 100
+
+ 
+
+updateStateTurns() - shortens all states on battler by 1 turn
+
+b.updateStateTurns(); 100
+
+ 
+
+addState(stateId) - adds state to the battler
+
+if (!b.isStateAffected(10)) b.addState(10); 100
+
+ 
+
+isStateAddable(stateId) - checks if state can be added to the battler
+
+c=100; if (b.isStateAddable(10)) b.addState(10); else c=4000; c
+
+ 
+
+removeState(stateId) - removes state from the battler
+
+if (a.isStateAffected(10)) a.removeState(10); 0
+
+ 
+
+
+ 
+
+ 
+
+
+What about buffs? Can we buff and debuff battlers?
+
+Yes!
+
+addBuff(paramId, turns) - adds a buff for a parameter
+
+a.addBuff(0, 3); b.def*10
+
+ 
+
+addDebuff(paramId, turns) - adds a debuff for a parameter
+
+b.addDebuff(2, 10); 9999
+
+ 
+
+removeBuff(paramId) - removes a buff or debuff from a battler
+
+removeAllBuffs() - removes all buffs and debuffs from a battler
+
+ 
+
+
+Parameter IDs
+
+0 - Max HP
+
+1 - Max MP
+
+2 - Attack
+
+3 - Defence
+
+4 - Magic Attack
+
+5 - Magic Defence
+
+6 - Agility
+
+7 - Luck
+
+
+ 
+
+General Battler Stuff
+
+die() - kills the battler
+
+b.die(); 0
+
+ 
+
+revive() - revives the battler
+
+a.revive(); 1000
+
+ 
+
+paramBase(paramId) - gets base parameter
+
+a.paramBase(3)*10 - b.def*2
+
+ 
+
+paramPlus(paramId) - gets the bonus of parameter
+
+a.paramPlus(3)*2 - b.def*2
+
+ 
+
+paramMax(paramId) - gets max possible value of parameter
+
+b.paramMax(0)
+
+ 
+
+elementRate(elementId) - checks element rate of the battler (rate being decimal numbers representing %)
+
+b.elementRate(10) >== 0.5 ? 10000 : a.mat*4;
+
+ 
+
+isStateResist(stateId) - checks whether the battler resists state
+
+c=0; b.isStateResist(10) ? c+=2000 : b.addState(10); c
+
+ 
+
+isSkillTypeSealed(stypeId) - checks if battler's skill type is sealed
+
+isSkillSealed(skillId) - checks if battler's skill is sealed
+
+isEquipTypeSealed(etypeId) - checks if battler's equip type is sealed
+
+isDualWield() - checks if battler can dual wield
+
+isGuard() - checks if battler is guarding
+
+recoverAll() - removes all states, restores HP and MP to max
+
+ 
+
+hpRate() - checks HP rate of battler
+
+mpRate() - checks MP rate of battler
+
+tpRate() - checks TP rate of battler
+
+b.hpRate() < 0.5 ? b.hp-1 : 100;
+
+ 
+
+isActor() - checks if battler is actor
+
+isEnemy() - checks if battler is enemy
+
+escape() - escapes from battle
+
+b.escape() (makes enemy run away)
+
+ 
+
+consumeItem(item) - eat up an item
+
+a.consumeItem($dataItems[15]); 100
+
+ 
+
+ 
+
+ 
+
+For actor only:
+
+currentExp() - current EXP
+
+currentLevelExp() - EXP needed for current level
+
+nextLevelExp() - EXP needed for next level
+
+nextRequiredExp() - EXP left until next level
+
+maxLevel() - max level of actor
+
+isMaxlevel() - is actor max level (true/false)
+
+hasWeapon() - is actor wielding a weapon (true/false)
+
+hasArmor() - is actor wearing any armor (true/false)
+
+clearEquipments() - unequip everything actor is wearing
+
+isClass(gameClass) - checks if actor is of a class (gameClass - $dataClasses[iD])
+
+hasNoWeapons() - checks if actor doesn't have any weapons
+
+levelUp() - levels actor up
+
+levelDown() - level actor down
+
+gainExp(exp) - gives actor exp
+
+learnSkill(skillId) - makes actor learn a skill
+
+forgetSkill(skillId) - makes actor forget a skill
+
+isLearnedSkill(skillId) - checks if actor has a skill learned
+
+actorId() - returns Actor's ID
+
+ 
+
+
+ 
+
+For enemy only:
+
+enemyId() - returns Enemy's ID
+
+ 
+
+What about Math? Can we use Math methods inside the formula?
+
+Yup, you totally can.
+
+ 
+
+Math.random() - returns a random number between 0 and 1 (0 <= n < 1)
+
+Math.min(numbers) - returns a minimum number from provided numbers.
+
+E.g. Math.min(10, 50, 40, 200) - would return 10.
+
+ 
+
+Math.max(numbers) - returns a maximum number from provided numbers.
+
+E.g. Math.max(10, 50, 40, 200) - would return 200.
+
+ 
+
+Math.round(number) - rounds a number to nearest integer.
+
+Math.ceil(number) - rounds the number up to nearest integer.
+
+Math.floor(number) - rounds the number down to nearest integer.
+
+ 
+
+Math.rand() returns a number between 0 and 1, but can we get a random number between 1 and 100? Or 5 and 200?
+
+No problem:
+
+ 
+
+
+Math.floor(Math.random()*100)+1
+
+^ That would return a number between 1 and 100. If we didn't add 1 at the end, it'd only return a number between 0 and 99.
+
+ 
+
+But that's a lot of text? Could we simplify somehow?
+
+Thankfully, there's a method in rpg_core.js that adds Math.randomInt(max);
+
+So we can write the same using:
+
+Math.randomInt(100)+1

@@ -1,0 +1,65 @@
+//For making forumula and logical
+
+a/b.remove_state(i),id = menghilangkan state
+a/b.addState(i),id = menambah state
+a/b.addBuffs(i),id = menambah buff
+if (con) {statement}; else if (con) {statement}; else {statement};
+
+a.removeState(25); a.remove_state(26); a.remove_state(27); a.remove_state(28); a.remove_state(29); a.remove_state(30); a.remove_state(31)
+a.removeState(38); a.remove_state(37); a.remove_state(40); 
+
+
+\\switch change line in script
+Game_Temp.prototype.setDestination = function(x, y) {
+if ($gameSwitches.value(value)) { statement }; // <---- for swith
+if ($gameVariable(variable input)).value = value {statement};
+this._destinationX = x;
+this._destinationY = y;
+};
+\\
+
+<Custom Regenerate Effect>
+$gameParty.gainGold(-1);
+if ($gameParty._gold <= 0) {
+ user.removeState(stateId);
+}
+</Custom Regenerate Effect>
+
+kaltes Feuer dari bahasa jerman yang artinya api dingin yang berasal dari eksperimen hennig brand
+
+//thunder element
+
+a.isStateAffected(24) ? multifier(default:3) * effect : effect;
+
+//fire element
+
+a.isStateAffected(26) ? multifier(default:3) * effect : effect; 
+
+//wind element
+
+a.isStateAffected(25) ? multifier(default:3) * effect : effect; 
+
+//earth element
+
+a.isStateAffected(24) ? multifier(default:3) * effect : effect; 
+
+//water element
+
+a.isStateAffected(29) ? multifier(default:3) * effect : effect; 
+
+//ice element
+
+a.isStateAffected(28) ? multifier(default:3) * effect : effect; 
+
+//light element 
+
+a.isStateAffected(30) ? multifier(default:3) * effect : effect; 
+
+//darkness element
+
+a.isStateAffected(31) ? multifier(default:3) * effect : effect;  
+
+
+if (a.hasWeapon())
+
+

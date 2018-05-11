@@ -1,0 +1,133 @@
+//--------------------------------------------------------
+// SOUL_MV Maid Special Skill Cut In.js
+//--------------------------------------------------------
+/*:
+* @plugindesc v3.0 Creates a classic Ougi / Maid Cut In Image
+* @author effect
+*
+* @help
+//--------------------------------------------------------
+// Description
+//--------------------------------------------------------
+
+Current Version: 3.0
+
+Allows special skills and critical hits to play a cutin
+animation.
+
+Do you wish to show a cutin image when a special skill is
+cast? This plugin allows you to do that, with two different
+types, the sliding and the classic static image.
+
+
+//--------------------------------------------------------
+// Documentation
+//--------------------------------------------------------
+Q: So, how can I make a skill appear a cutin?
+A: You have to put this on the note tag of the skill:
+<anime:Maid>
+(no spaces)
+
+Q: I did try that. So the images are determined
+which actor / enemy uses it?
+
+A: That's right. if you want the enemy to display
+his / her cutin, you need to put the name of the
+enemy on the file, for example:
+
+Bat_skillName
+
+Same goes for Actors:
+
+Harold_skillName
+
+where skillName is the name of the skill you are performing.
+For example, Harold casts Spark. An image named
+
+Harold_Spark should be on the Maid folder.
+
+This applies both to Actors and Enemies.
+
+The images must be placed under the img / Maid folder.
+
+For the Critical Hits, you need to do a different setup.
+
+The actor's name and _critical should be in the 
+img / Maid folder. For example, if you want
+to display Harold when he hits a critical hit,
+he should have an image called
+
+Harold_critical
+
+same goes with an enemy. For example, Minotaur
+hits a critical hit, then it should have a 
+file called:
+
+Minotaur_critical.
+
+Q: My enemy's cutin doesn't appear! What happened?
+A: To allow the enemy have the cutin, place this note tag on the enemy notebox:
+(note: no spaces)
+<enemyAnime:allow>
+
+//--------------------------------------------------------
+// Terms of Use:
+// You are free to use this script only Commercial / Non Commercial Use.
+//--------------------------------------------------------
+* @param OriginalX
+* @desc The original position of the image horizontally. - value is Left, + value is Right. (Slide Action)
+* @default 400
+*
+* @param Slide Cutin Image
+* @desc The image used when the cutin ensues to slide.
+* @default slide_cutin
+* 
+* @param MotionStyle
+* @desc Motion type of cutin appearance. 
+slide or static.
+* @default slide
+*
+* @param SlideY
+* @desc The y axis of the cutin image during Slide Action only.
+* @default 150
+*
+* @param StaticX
+* @desc The y axis of the cutin image during Static Action only.
+* @default 270
+*
+* @param StaticY
+* @desc The y axis of the cutin image during Static Action only.
+* @default 212
+*
+* @param OriginalOpacity
+* @desc The original opacity of the cutin image.
+* @default 255
+*
+* @param CutinSliderX
+* @desc The original position of the image cutin slider horizontally. - value is Left, + value is Right.
+* @default 0
+*
+* @param CutinSliderY
+* @desc The original position of the image cutin slider horizontally. - value is Left, + value is Right.
+* @default 150
+*
+* @param CutinSliderWidth
+* @desc The width of the image cutin slider.
+* @default 816
+*
+* @param CutinSliderHeight
+* @desc The height of the image cutin slider.
+* @default 278
+*
+* @param XMoveSpeed
+* @desc How fast do you want the image to slide?
+* @default 20
+*
+* @param FadeSpeed
+* @desc How fast do you want the image to fade?
+* @default 20 
+*
+* @param FadeSpeed
+* @desc How fast do you want the cutin back image to scroll?
+* @default 30 
+*/
